@@ -25,6 +25,17 @@ resource "alicloud_security_group_rule" "allow_all_tcp" {
   cidr_ip           = "0.0.0.0/0"
 }
 
+resource "alicloud_security_group_rule" "allow_all_icmp" {
+  type              = "ingress"
+  ip_protocol       = "icmp"
+  nic_type          = "intranet"
+  policy            = "accept"
+  port_range        = "-1/-1"
+  priority          = 1
+  security_group_id = alicloud_security_group.asg.id
+  cidr_ip           = "0.0.0.0/0"
+}
+
 module "ECS_Instance" {  
  source                      = "./modules/modules/ecs"
  region                      = var.region
