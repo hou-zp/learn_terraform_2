@@ -89,7 +89,7 @@ module "eip" {
   computed_instances = [
     {
       instance_ids  = [module.slb.this_slb_id]
-      instance_type = "SlbInstance"
+      instance_type = "ClbInstance"
       private_ips   = []
     }
   ]
