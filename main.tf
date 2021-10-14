@@ -26,7 +26,7 @@ resource "alicloud_security_group_rule" "allow_all_tcp" {
 }
 
 module "ECS_Instance" {  
- source                      = "./modules/ecs"
+ source                      = "./modules/modules/ecs"
  region                      = var.region
  number_of_instances         = var.instance_number  
  vswitch_id                  = alicloud_vswitch.vsw.id  
@@ -51,7 +51,7 @@ module "ECS_Instance" {
 }
 
 module "slb" {
-  source  = "./modules/slb"
+  source  = "./modules/modules/slb"
   spec = "slb.s2.small"
   servers_of_default_server_group = [
     {
@@ -63,7 +63,7 @@ module "slb" {
 }
   
 module "eip" {
-  source = "./modules/eip"
+  source = "./modules/modules/eip"
   create               = true
   name                 = "slb-eip"
   description          = "An EIP associated with slb."
