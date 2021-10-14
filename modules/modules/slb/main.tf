@@ -109,6 +109,21 @@ resource "alicloud_slb_listener" "listener" {
   scheduler        = "rr"
   health_check     = "on"
   acl_status       = "on"
+  acl_type         = "white"
+  acl_id           = alicloud_slb_acl.default.id
+}
+    
+resource "alicloud_slb_acl" "default" {
+  name       = "slb_acl"
+  ip_version = "ipv4"
+  entry_list {
+    entry   = "10.10.10.0/24"
+    comment = "first"
+  }
+  entry_list {
+    entry   = "168.10.10.0/24"
+    comment = "second"
+  }
 }
 
 
