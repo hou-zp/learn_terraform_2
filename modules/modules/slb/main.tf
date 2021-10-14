@@ -101,7 +101,7 @@ resource "alicloud_slb_server_group" "this" {
     
 # 创建负载均衡监听器
 resource "alicloud_slb_listener" "listener" {
-  load_balancer_id = alicloud_slb.this.id
+  load_balancer_id = alicloud_slb.this[count.index].id
   backend_port     = "80"
   frontend_port    = "80"
   protocol         = "http"
