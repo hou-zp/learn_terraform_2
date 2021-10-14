@@ -25,7 +25,7 @@ resource "alicloud_security_group_rule" "allow_all_tcp" {
   cidr_ip           = "0.0.0.0/0"
 }
 
-module "tf-instances" {  
+module "ECS_Instance" {  
  source                      = "./modules/ecs"
  region                      = var.region
  number_of_instances         = var.instance_number  
@@ -39,7 +39,7 @@ module "tf-instances" {
  instance_name               = "my_module_instances_"  
  host_name                   = "sample"  
  internet_charge_type        = "PayByTraffic"   
- password                    = "User@123" 
+ password                    = "root" 
  system_disk_category        = var.system_disk_category
  data_disks = [    
   {      
@@ -55,7 +55,7 @@ module "slb" {
   spec = "slb.s2.small"
   servers_of_default_server_group = [
     {
-      server_ids = join(",", module.tf-instances.this_instance_id)
+      server_ids = join(",", module.ECS_Instance.this_instance_id)
       weight     = "100"
       type       = "ecs"
     },
@@ -74,11 +74,11 @@ module "eip" {
   resource_group_id    = ""
 
   # The number of instances created by other modules
-  number_of_computed_instances = 2
+  number_of_computed_instances = 1
   computed_instances = [
     {
-      instance_ids  = module.slb.this_instance_id
-      instance_type = "EcsInstance"
+      instance_ids  = module.slb.this_slb_id
+      instance_type = "SlbInstance"
       private_ips   = []
     }
   ]
