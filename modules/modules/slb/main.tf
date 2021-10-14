@@ -106,7 +106,7 @@ resource "alicloud_slb_listener" "listener" {
   frontend_port    = "80"
   protocol         = "http"
   bandwidth        = "10"
-  server_group_id  = alicloud_slb_server_group.this.id
+  server_group_id  = alicloud_slb_server_group.this.[count.index].id
 }
 
 
