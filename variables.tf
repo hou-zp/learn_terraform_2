@@ -10,7 +10,7 @@ variable "region" {
 
 variable "vpc_name" {
    description = "vpc名称"
-   default = "iac_foo"
+   default = "test_vpc"
 }
 
 variable "ip_protocol" {
@@ -20,7 +20,7 @@ variable "ip_protocol" {
 
 variable "instance_number" {
    description = "云主机数量"
-   default = "3"
+   default = "2"
 }
 
 variable "instance_type" {
