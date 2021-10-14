@@ -63,7 +63,7 @@ variable "internal" {
 variable "address_type" {
   description = "The type of address. Choices are 'intranet' and 'internet'. Default to 'internet'."
   type        = string
-  default     = "internet"
+  default     = "intranet"
 }
 
 variable "internet_charge_type" {
