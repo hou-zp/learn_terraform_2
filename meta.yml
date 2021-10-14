@@ -1,0 +1,11 @@
+version: 0.1
+templates:
+- name: yunji_alicloud_ecs_slb
+  terraform:
+    workdir: ./
+    var:
+      access_key: ''
+      secret_key: ''
+      region: ''
+      vswitch_availability_zone: cn-beijing-b
+    save_state: true
