@@ -9,7 +9,7 @@ resource "alicloud_vswitch" "vsw" {
   availability_zone = "cn-beijing-b"
 }
 
-resource "alicloud_security_group" "default" {
+resource "alicloud_security_group" "asg" {
   name   = "default"
   vpc_id = alicloud_vpc.vpc.id
 }
@@ -59,5 +59,27 @@ module "slb" {
       weight     = "100"
       type       = "ecs"
     },
+  ]
+}
+  
+module "eip" {
+  source = "./modules/eip"
+  create               = true
+  name                 = "slb-eip"
+  description          = "An EIP associated with slb."
+  bandwidth            = 5
+  internet_charge_type = "PayByTraffic"
+  instance_charge_type = "PostPaid"
+  period               = 1
+  resource_group_id    = ""
+
+  # The number of instances created by other modules
+  number_of_computed_instances = 2
+  computed_instances = [
+    {
+      instance_ids  = module.slb.this_instance_id
+      instance_type = "EcsInstance"
+      private_ips   = []
+    }
   ]
 }
