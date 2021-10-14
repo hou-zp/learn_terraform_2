@@ -106,6 +106,7 @@ resource "alicloud_slb_listener" "listener" {
   frontend_port    = "80"
   protocol         = "http"
   bandwidth        = "10"
+  scheduler        = "rr"
   health_check     = "on"
   acl_status       = "on"
 }
