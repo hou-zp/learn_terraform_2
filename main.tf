@@ -64,6 +64,7 @@ module "ECS_Instance" {
 module "slb" {
   source  = "./modules/modules/slb"
   spec = "slb.s2.small"
+  vswitch_id = alicloud_vswitch.vsw.id
   servers_of_default_server_group = [
     {
       server_ids = join(",", module.ECS_Instance.this_instance_id)
