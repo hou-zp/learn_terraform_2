@@ -39,7 +39,7 @@ module "ECS_Instance" {
  instance_name               = "my_module_instances_"  
  host_name                   = "sample"  
  internet_charge_type        = "PayByTraffic"   
- password                    = "root" 
+ password                    = "User@123" 
  system_disk_category        = var.system_disk_category
  data_disks = [    
   {      
